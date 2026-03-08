@@ -2,9 +2,14 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { BrowserRouter, Link, Switch } from 'react-router-dom'
-import { Navbar, Container, Nav} from 'react-bootstrap'
+import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
+import { Navbar, Container, Nav } from 'react-bootstrap'
 
+
+
+import Landing from './pages/landing'
+import Contributors from './pages/contributors'
+// import Media from './pages/media'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -14,19 +19,24 @@ function App() {
         <BrowserRouter>
           <Navbar bg="dark" variant="dark">
             <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
-            <Nav className = "mr-auto">
+            {/* Changed mr-auto to me-auto for Bootstrap 5 */}
+            <Nav className="me-auto">
               <Nav.Link as={Link} to="/media">Media</Nav.Link>
-              <Nav.Link as={Link} to="/contact">Contributor</Nav.Link>
+              <Nav.Link as={Link} to="/contributors">Contributors</Nav.Link>
             </Nav>
           </Navbar>
-          <Switch>
-            <Route exact path="/" componet = {() => <h1>Home</h1>} />
-            <Route path="/media" component = {() => <h1>Media</h1>} />
-            <Route path="/contributor" component = {() => <h1>Contributor</h1>} />
-          </Switch>
+          <Routes>
+            {/* Removed 'exact' as it is default behavior */}
+            <Route path="/" element={<Landing />} />
+            <Route path="/media" element={<Landing />} />
+            <Route path="/contributors" element={<Contributors />} />
+          </Routes>
         </BrowserRouter>
+
+
       </Container>
     </>
+
   )
 }
 
